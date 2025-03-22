@@ -26,6 +26,11 @@ dependencies:
   package_info_plus: ^8.3.0
   screenshot: ^3.0.0
   share_plus: ^10.1.4
+  supabase_flutter: ^2.0.0
+  firebase_analytics: ^11.4.4
+  firebase_core: ^3.12.1
+  firebase_performance: ^0.10.1+4
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:

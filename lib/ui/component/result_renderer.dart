@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:random_frame/domain/game_result.dart';
 
 class ResultRenderer {
@@ -11,8 +12,8 @@ class ResultRenderer {
         _imageResult("dice_${result.result}", result.rotation, 12),
       Magic8BallResult() =>
         _imageWithTextResult("8ball_back", result.result, result.rotation),
-      NumberRollResult() => _textResult(result.result.toString(), 24),
-      PostNumberRollResult() => _textResult("№${result.result}", 16),
+      NumberRollResult() => _textResult(result.result.toString(), 72),
+      PostNumberRollResult() => _textResult("№${result.result}", 36),
       _ => throw ArgumentError('Unknown result type: ${result.runtimeType}'),
     };
 
@@ -41,7 +42,7 @@ class ResultRenderer {
   Widget _textResult(String result, double textSize) {
     return Text(
       result,
-      style: TextStyle(fontSize: textSize),
+      style: GoogleFonts.oxanium(fontSize: textSize),
     );
   }
 
@@ -59,9 +60,16 @@ class ResultRenderer {
             ),
           ),
         ),
-        Text(
-          result,
-          textAlign: TextAlign.center,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            result,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.lato(
+              fontSize: 24,
+              color: const Color(0xFFFBFBF9),
+            ),
+          ),
         )
       ]),
     );

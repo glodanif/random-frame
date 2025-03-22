@@ -43,7 +43,8 @@ class SharingBottomSheet extends StatelessWidget {
                   BlocProvider.of<SharingBloc>(context).download(image);
                 },
                 onShare: (image, action) {
-                  BlocProvider.of<SharingBloc>(context).share(image, action);
+                  BlocProvider.of<SharingBloc>(context)
+                      .share(image, result.hashCode, action);
                 },
                 onScreenshotFailed: () {
                   _showMyDialog(context);

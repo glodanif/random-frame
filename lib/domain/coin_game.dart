@@ -22,6 +22,7 @@ class CoinGame extends Game {
     return CoinFlipResult(
       result: random.nextBool(),
       rotation: random.nextInt(360) + 1,
+      dateTime: DateTime.now(),
     );
   }
 }

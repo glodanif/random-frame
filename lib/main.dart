@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -5,12 +6,15 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:random_frame/data/js/js_layer.dart';
 import 'package:random_frame/domain/game_type.dart';
+import 'package:random_frame/firebase_options.dart';
 import 'package:random_frame/log/bloc_logging.dart';
 import 'package:random_frame/sl/get_it.dart';
 import 'package:random_frame/ui/game/game_page.dart';
 import 'package:random_frame/ui/home/home_page.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:theme_provider/theme_provider.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 const lightTheme = "light";
 const darkTheme = "dark";
@@ -20,10 +24,21 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
+  await initSaas();
   initDependencies();
   initJsBridge();
   initBlocLogging(enabled: true);
   runApp(RandomApp());
+}
+
+Future<void> initSaas() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await Supabase.initialize(
+    url: dotenv.env['NEXT_PUBLIC_SUPABASE_URL'] ?? '',
+    anonKey: dotenv.env['NEXT_PUBLIC_SUPABASE_ANON_KEY'] ?? '',
+  );
 }
 
 class RandomApp extends StatelessWidget {
@@ -31,7 +46,7 @@ class RandomApp extends StatelessWidget {
 
   final GoRouter _router = GoRouter(
     observers: <NavigatorObserver>[
-      //FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
     ],
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: !kReleaseMode,
@@ -58,7 +73,7 @@ class RandomApp extends StatelessWidget {
   final _lightTheme = ThemeData(
     scaffoldBackgroundColor: const Color(0XFFF1F6F9),
     bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Color(0xFF151638),
+      backgroundColor: Color(0xFF151638),
       dragHandleColor: Color(0xFF50516D),
       dragHandleSize: Size(64, 8),
     ),

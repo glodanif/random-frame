@@ -172,6 +172,7 @@ class _GamePageState extends State<GamePage> {
                       context: context,
                       showDragHandle: true,
                       elevation: 8,
+                      isScrollControlled: true,
                       builder: (context) => SharingBottomSheet(
                         result: result,
                         game: widget._game,

@@ -45,6 +45,7 @@ class MagicBallGame extends Game {
     return Magic8BallResult(
       result: _possibleResults[random.nextInt(_possibleResults.length)],
       rotation: random.nextInt(360) + 1,
+      dateTime: DateTime.now(),
     );
   }
 }

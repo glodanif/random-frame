@@ -7,17 +7,21 @@ import 'package:random_frame/domain/game_type.dart';
 class NumberGame extends Game {
   final random = Random();
 
-  NumberGame(): super(
-    id: GameType.number,
-    callToAction: 'Roll 1-100',
-    emoji: '🔢',
-    title: 'Roll 1-100',
-    action: 'Roll',
-    doneAction: 'rolled a number',
-  );
+  NumberGame()
+      : super(
+          id: GameType.number,
+          callToAction: 'Roll 1-100',
+          emoji: '🔢',
+          title: 'Roll 1-100',
+          action: 'Roll',
+          doneAction: 'rolled a number',
+        );
 
   @override
   GameResult roll() {
-    return NumberRollResult(random.nextInt(100) + 1);
+    return NumberRollResult(
+      result: random.nextInt(100) + 1,
+      dateTime: DateTime.now(),
+    );
   }
 }
