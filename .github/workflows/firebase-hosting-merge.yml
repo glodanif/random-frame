@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     name: Build
-    needs: [ semantic-pull-request, analyze ]
     runs-on: ubuntu-latest
     steps:
       - name: 📚 Git Checkout
