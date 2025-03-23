@@ -1,59 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    <base href="$FLUTTER_BASE_HREF">
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+    <title>Random</title>
+    <meta name="description" content="Decision making assistant">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Random">
+    <meta property="og:description" content="Decision making assistant">
+    <meta property="og:image" content="https://random-frame.web.app/opengraph-image.png">
 
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Random">
+    <meta name="twitter:description" content="Decision making assistant">
+    <meta name="twitter:image" content="https://random-frame.web.app/opengraph-image.png">
 
-  <meta charset="utf-8">
-  <title>Random</title>
-  <meta name="description" content="Decision making assistant">
+    <!-- Other Meta Tags -->
+    <meta name="fc:frame"
+          content='{"version":"next","imageUrl":"https://random-frame.web.app/opengraph-image.png","button":{"title":"🎲 Start","action":{"type":"launch_frame","name":"Random","url":"https://random-frame.web.app","splashImageUrl":"https://random-frame.web.app/logo.png","splashBackgroundColor":"#1D3557"}}}'>
 
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.png" type="image/png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Random">
-  <meta property="og:description" content="Decision making assistant">
-  <meta property="og:image" content="https://random-frame.web.app/opengraph-image.png">
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Random">
-  <meta name="twitter:description" content="Decision making assistant">
-  <meta name="twitter:image" content="https://random-frame.web.app/opengraph-image.png">
-
-  <!-- Other Meta Tags -->
-  <meta name="fc:frame" content='{"version":"next","imageUrl":"https://random-frame.web.app/opengraph-image.png","button":{"title":"🎲 Start","action":{"type":"launch_frame","name":"Random","url":"https://random-frame.web.app","splashImageUrl":"https://random-frame.web.app/logo.png","splashBackgroundColor":"#1D3557"}}}'>
-
-  <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/index.min.js"></script>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/index.min.js"></script>
 </head>
 <body>
 <script>
-  const appVersion = '1.0.0+1'
-
-  var jsAppScriptTag = document.createElement('script');
-  jsAppScriptTag.src = 'app.js?v=' + appVersion;
-  jsAppScriptTag.type = 'application/javascript';
-  document.body.append(jsAppScriptTag);
+    const appVersion = '1.0.1+4'
+    const jsAppScriptTag = document.createElement('script');
+    jsAppScriptTag.src = 'app.js?v=' + appVersion;
+    jsAppScriptTag.type = 'application/javascript';
+    document.body.append(jsAppScriptTag);
 </script>
 <script src="flutter_bootstrap.js" async></script>
 </body>

@@ -1,1 +1,16 @@
-{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"random-frame","configurations":{"web":"1:608009457481:web:c0ea458d4fa0999ae99498"}}}}}}
+{
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

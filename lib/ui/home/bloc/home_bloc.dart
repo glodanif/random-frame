@@ -19,11 +19,11 @@ class HomeBloc extends Cubit<HomeState> {
     _rotation = random.nextDouble() * 360;
   }
 
-  notifyReady() {
+  void notifyReady() {
     _jsBridge.notifyReady();
   }
 
-  loadContext() async {
+  Future<void> loadContext() async {
     final context = await _jsBridge.requestContext();
     //if (context.location != null) {
     emit(
@@ -36,5 +36,9 @@ class HomeBloc extends Cubit<HomeState> {
     //} else {
     //  emit(InvalidLocationState());
     //}
+  }
+
+  void closeFrame() {
+    _jsBridge.closeFrame();
   }
 }

@@ -36,10 +36,6 @@ class SharingBloc extends Cubit<SharingState> {
     ));
   }
 
-  void download(Uint8List image) {
-    _jsBridge.downloadImageFromBytes(image, _generateRandomFileName());
-  }
-
   Future<void> share(Uint8List image, int uid, SharingAction action) async {
     final imageUrl = await _uploadFileOfGetExisting(image, uid);
     if (action == SharingAction.share) {

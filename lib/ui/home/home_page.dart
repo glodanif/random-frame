@@ -64,7 +64,9 @@ class HomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<HomeBloc>(context).closeFrame();
+              },
               icon: const Icon(Icons.close),
               color: Theme.of(context).scaffoldBackgroundColor,
             ),

@@ -19,8 +19,8 @@ class JsBridge {
     notifyReadyJs();
   }
 
-  void downloadImageFromBytes(Uint8List bytes, String fileName) {
-    downloadImageFromBytesJs(bytes, fileName);
+  void closeFrame() {
+    closeFrameJs();
   }
 
   void openUrl(String url) {

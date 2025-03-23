@@ -39,9 +39,6 @@ class SharingBottomSheet extends StatelessWidget {
               return _receiptView(
                 context: context,
                 state: state,
-                onDownload: (image) {
-                  BlocProvider.of<SharingBloc>(context).download(image);
-                },
                 onShare: (image, action) {
                   BlocProvider.of<SharingBloc>(context)
                       .share(image, result.hashCode, action);
@@ -74,7 +71,6 @@ class SharingBottomSheet extends StatelessWidget {
   Widget _receiptView({
     required BuildContext context,
     required InfoState state,
-    required Function(Uint8List) onDownload,
     required Function(Uint8List, SharingAction) onShare,
     required Function() onScreenshotFailed,
   }) {
@@ -100,7 +96,7 @@ class SharingBottomSheet extends StatelessWidget {
                   icon: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: SvgPicture.asset(
-                      'ic_farcaster.svg',
+                      'assets/ic_farcaster.svg',
                       height: 24,
                       width: 24,
                     ),
@@ -139,20 +135,6 @@ class SharingBottomSheet extends StatelessWidget {
                       onScreenshotFailed();
                     }
                   }),
-              IconButton.filled(
-                icon: const Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: Icon(Icons.download, size: 24),
-                ),
-                onPressed: () async {
-                  Uint8List? screenshot = await _captureReceipt();
-                  if (screenshot != null) {
-                    onDownload(screenshot);
-                  } else {
-                    onScreenshotFailed();
-                  }
-                },
-              ),
             ],
           ),
           const SizedBox(height: 32),

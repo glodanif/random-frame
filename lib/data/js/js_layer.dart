@@ -1,7 +1,6 @@
 @JS()
 library js_bridge;
 
-import 'package:flutter/foundation.dart';
 import 'package:js/js.dart';
 import 'package:random_frame/data/js/js_bridge.dart';
 import 'package:random_frame/domain/js_layer_event.dart';
@@ -12,11 +11,11 @@ final _jsBridge = getIt<JsBridge>();
 @JS('notifyReady')
 external void notifyReadyJs();
 
+@JS('closeFrame')
+external void closeFrameJs();
+
 @JS('requestContext')
 external void requestContextJs();
-
-@JS('downloadImageFromBytes')
-external void downloadImageFromBytesJs(Uint8List bytes, String fileName);
 
 @JS('openUrl')
 external void openUrlJs(String url);
