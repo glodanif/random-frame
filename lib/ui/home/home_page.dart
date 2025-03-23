@@ -37,8 +37,8 @@ class HomePage extends StatelessWidget {
         child: SizedBox(
           width: 96.0,
           height: 96.0,
-          child: Image.asset(
-            'assets/dice_5.png',
+          child: SvgPicture.asset(
+            "assets/dice_5.svg",
             fit: BoxFit.contain,
           ),
         ),
