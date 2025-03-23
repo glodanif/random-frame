@@ -39,4 +39,17 @@ class JsBridge {
     requestContextJs();
     return completer.future;
   }
+
+  Future<String?> requestCaptchaToken() {
+    final completer = Completer<String?>();
+    StreamSubscription? subscription;
+    subscription = jsEventController.stream.listen((event) {
+      if (event is OnCaptchaToken) {
+        completer.complete(event.token);
+        subscription?.cancel();
+      }
+    });
+    requestCaptchaTokenJs();
+    return completer.future;
+  }
 }

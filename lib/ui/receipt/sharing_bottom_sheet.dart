@@ -32,9 +32,19 @@ class SharingBottomSheet extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         width: double.infinity,
-        child: BlocBuilder<SharingBloc, SharingState>(
+        child: BlocConsumer<SharingBloc, SharingState>(
+          listenWhen: (context, state) {
+            return state is UploadingFailedState;
+          },
+          listener: (BuildContext context, SharingState state) {
+            if (state is UploadingFailedState) {
+              _showMyDialog(context, 'Unable to upload image...');
+            }
+          },
           buildWhen: (context, state) {
-            return state is! UploadingState && state is! UploadedState;
+            return state is! UploadingState &&
+                state is! UploadedState &&
+                state is! UploadingFailedState;
           },
           builder: (context, state) {
             if (state is LoadingState) {
@@ -48,7 +58,7 @@ class SharingBottomSheet extends StatelessWidget {
                       .share(image, result.hashCode, action);
                 },
                 onScreenshotFailed: () {
-                  _showMyDialog(context);
+                  _showMyDialog(context, 'Unable to generate an image...');
                 },
               );
             } else {
@@ -174,17 +184,17 @@ class SharingBottomSheet extends StatelessWidget {
     }
   }
 
-  Future<void> _showMyDialog(BuildContext context) async {
+  Future<void> _showMyDialog(BuildContext context, String text) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Error'),
-          content: const SingleChildScrollView(
+          content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Unable to generate an image...'),
+                Text(text),
               ],
             ),
           ),

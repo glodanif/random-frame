@@ -17,15 +17,24 @@ external void closeFrameJs();
 @JS('requestContext')
 external void requestContextJs();
 
+@JS('requestCaptchaToken')
+external void requestCaptchaTokenJs();
+
 @JS('openUrl')
 external void openUrlJs(String url);
 
 @JS('onContextLoaded')
 external set _onContextLoaded(void Function(String?, String?) function);
 
+@JS('onCaptchaToken')
+external set _onCaptchaToken(void Function(String?) function);
+
 void initJsBridge() {
   final eventController = _jsBridge.jsEventController;
   _onContextLoaded = allowInterop((username, location) {
     eventController.add(OnContextReady(username, location));
+  });
+  _onCaptchaToken = allowInterop((token) {
+    eventController.add(OnCaptchaToken(token));
   });
 }

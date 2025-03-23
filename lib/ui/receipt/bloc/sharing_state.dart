@@ -9,6 +9,8 @@ class LoadingState extends SharingState {}
 
 class UploadingState extends SharingState {}
 
+class UploadingFailedState extends SharingState {}
+
 class UploadedState extends SharingState {}
 
 class InfoState extends SharingState {

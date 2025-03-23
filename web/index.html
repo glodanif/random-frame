@@ -29,15 +29,29 @@
     <link rel="icon" type="image/png" href="favicon.png"/>
 
     <script src="https://cdn.jsdelivr.net/npm/@farcaster/frame-sdk/dist/index.min.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
 </head>
 <body>
 <script>
-    const appVersion = '1.0.2+3'
+
+    window.captchaToken;
+
+    window.onCaptchaSuccess = function(token) {
+        window.captchaToken = token;
+        console.log("Token stored successfully");
+    };
+
+    const appVersion = '1.0.2+4'
     const jsAppScriptTag = document.createElement('script');
     jsAppScriptTag.src = 'app.js?v=' + appVersion;
     jsAppScriptTag.type = 'application/javascript';
     document.body.append(jsAppScriptTag);
 </script>
+<div class="cf-turnstile"
+     data-sitekey="0x4AAAAAABCMofKm27AHz1H7"
+     data-callback="onCaptchaSuccess"
+     data-appearance="invisible">
+</div>
 <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

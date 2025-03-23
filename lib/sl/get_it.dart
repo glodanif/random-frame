@@ -10,11 +10,17 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 final getIt = GetIt.instance;
 
 initDependencies() {
-  getIt.registerLazySingleton<SupabaseStorageClient>(
-      () => Supabase.instance.client.storage);
+  getIt.registerLazySingleton<StorageFileApi>(
+      () => Supabase.instance.client.storage.from('random-results'));
+  getIt.registerLazySingleton<GoTrueClient>(
+          () => Supabase.instance.client.auth);
   getIt.registerLazySingleton<JsBridge>(() => JsBridge());
   getIt.registerLazySingleton<SupabaseFileStorage>(
-      () => SupabaseFileStorage(getIt<SupabaseStorageClient>()));
+      () => SupabaseFileStorage(
+          getIt<StorageFileApi>(),
+          getIt<GoTrueClient>(),
+          getIt<JsBridge>(),
+      ));
   getIt.registerLazySingleton<UploadedFiles>(() => UploadedFiles());
   getIt.registerFactory<HomeBloc>(() => HomeBloc(getIt<JsBridge>()));
   getIt.registerFactory<GameBloc>(() => GameBloc());

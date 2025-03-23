@@ -6,3 +6,9 @@ class OnContextReady extends JsLayerEvent {
 
   OnContextReady(this.username, this.location);
 }
+
+class OnCaptchaToken extends JsLayerEvent {
+  final String? token;
+
+  OnCaptchaToken(this.token);
+}

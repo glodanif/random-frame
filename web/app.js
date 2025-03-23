@@ -14,3 +14,8 @@ async function requestContext() {
 async function openUrl(url) {
     await frame.sdk.actions.openUrl(url);
 }
+
+function requestCaptchaToken() {
+    console.log(window.captchaToken);
+    window.onCaptchaToken(window.captchaToken);
+}

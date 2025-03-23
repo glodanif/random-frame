@@ -36,13 +36,18 @@ class SharingBloc extends Cubit<SharingState> {
   }
 
   Future<void> share(Uint8List image, int uid, SharingAction action) async {
-    final imageUrl = await _uploadFileOfGetExisting(image, uid);
-    emit(UploadedState());
-    if (action == SharingAction.copy) {
-      Clipboard.setData(ClipboardData(text: imageUrl));
-    } else if (action == SharingAction.cast) {
-      final intentUrl = "https://warpcast.com/~/compose?embeds[]=$imageUrl";
-      _jsBridge.openUrl(intentUrl);
+    try {
+      final imageUrl = await _uploadFileOfGetExisting(image, uid);
+      emit(UploadedState());
+      if (action == SharingAction.copy) {
+        Clipboard.setData(ClipboardData(text: imageUrl));
+      } else if (action == SharingAction.cast) {
+        final intentUrl = "https://warpcast.com/~/compose?embeds[]=$imageUrl";
+        _jsBridge.openUrl(intentUrl);
+      }
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+      emit(UploadingFailedState());
     }
   }
 
@@ -53,7 +58,12 @@ class SharingBloc extends Cubit<SharingState> {
       return existingUrl;
     } else {
       final fileName = _generateRandomFileName();
-      final url = await _fileStorage.uploadFile(image, fileName);
+      final context = await _jsBridge.requestContext();
+      final url = await _fileStorage.uploadFile(
+        image,
+        fileName,
+        context.username ?? "anon",
+      );
       _uploadedFiles.addFile(uid, url);
       return url;
     }
