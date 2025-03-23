@@ -23,7 +23,7 @@ jobs:
         with:
           fail_on_empty: true
           envkey_NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          envkeyNEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          envkey_NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           file_name: .env
       - name: 📦 Install Dependencies
         run: flutter pub get
