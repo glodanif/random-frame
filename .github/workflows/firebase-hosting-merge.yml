@@ -24,10 +24,7 @@ jobs:
           echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> .env
           cat .env  # Debugging: remove this after testing
       - name: 📦 Install Dependencies
-        run: |
-          flutter pub global activate very_good_cli
-          very_good --analytics false
-          very_good packages get --recursive
+        run: flutter pub get
       - name: 🛠️ Build the application
         run: flutter build web -t lib/main_production.dart
       - name: ⬇️ Archive Production Artifact
