@@ -96,9 +96,22 @@ class _GamePageState extends State<GamePage> {
   Widget _initialView() {
     return Column(
       children: [
-        const AspectRatio(
+        AspectRatio(
           aspectRatio: 1,
-          child: Text("data"),
+          child: Column(
+           mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                "${widget._game.action} to get your random result",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              Icon(
+                Icons.keyboard_arrow_down_rounded,
+                size: 48,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 18.0),
         Builder(builder: (context) {
@@ -143,7 +156,20 @@ class _GamePageState extends State<GamePage> {
       children: [
         AspectRatio(
           aspectRatio: 1,
-          child: _resultRenderer.render(result),
+          child: TweenAnimationBuilder<double>(
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeOut,
+            tween: Tween(begin: 0.8, end: 1.0),
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Opacity(
+                  opacity: value,
+                  child: _resultRenderer.render(result),
+                ),
+              );
+            },
+          ),
         ),
         const SizedBox(height: 18.0),
         Builder(builder: (context) {

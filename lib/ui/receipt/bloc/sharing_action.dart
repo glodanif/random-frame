@@ -1,1 +1,1 @@
-enum SharingAction { cast, share, copy }
+enum SharingAction { cast, copy }

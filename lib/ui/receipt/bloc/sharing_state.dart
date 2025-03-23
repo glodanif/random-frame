@@ -7,6 +7,10 @@ class SharingInitial extends SharingState {}
 
 class LoadingState extends SharingState {}
 
+class UploadingState extends SharingState {}
+
+class UploadedState extends SharingState {}
+
 class InfoState extends SharingState {
   final String? username;
   final String appVersion;

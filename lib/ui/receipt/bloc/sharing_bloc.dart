@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:random_frame/data/supabase_file_storage.dart';
 import 'package:random_frame/data/uploaded_files.dart';
 import 'package:random_frame/ui/receipt/bloc/sharing_action.dart';
-import 'package:share_plus/share_plus.dart';
 
 part 'sharing_state.dart';
 
@@ -38,16 +37,17 @@ class SharingBloc extends Cubit<SharingState> {
 
   Future<void> share(Uint8List image, int uid, SharingAction action) async {
     final imageUrl = await _uploadFileOfGetExisting(image, uid);
-    if (action == SharingAction.share) {
-      Share.share(imageUrl);
-    } else if (action == SharingAction.copy) {
+    emit(UploadedState());
+    if (action == SharingAction.copy) {
       Clipboard.setData(ClipboardData(text: imageUrl));
     } else if (action == SharingAction.cast) {
-      _jsBridge.openUrl(imageUrl);
+      final intentUrl = "https://warpcast.com/~/compose?embeds[]=$imageUrl";
+      _jsBridge.openUrl(intentUrl);
     }
   }
 
   Future<String> _uploadFileOfGetExisting(Uint8List image, int uid) async {
+    emit(UploadingState());
     final existingUrl = _uploadedFiles.getUrlById(uid);
     if (existingUrl != null) {
       return existingUrl;

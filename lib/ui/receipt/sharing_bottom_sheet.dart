@@ -16,7 +16,7 @@ class SharingBottomSheet extends StatelessWidget {
   final Game game;
   final String request;
   final _screenshotController = ScreenshotController();
-  Uint8List? _screensot = null;
+  Uint8List? _screenshot;
 
   SharingBottomSheet({
     super.key,
@@ -33,6 +33,9 @@ class SharingBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         width: double.infinity,
         child: BlocBuilder<SharingBloc, SharingState>(
+          buildWhen: (context, state) {
+            return state is! UploadingState && state is! UploadedState;
+          },
           builder: (context, state) {
             if (state is LoadingState) {
               return _loadingView(context);
@@ -59,11 +62,11 @@ class SharingBottomSheet extends StatelessWidget {
 
   Widget _loadingView(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(36.0),
+      padding: const EdgeInsets.all(8.0),
       child: Center(
         child: SpinKitDoubleBounce(
-          size: 64.0,
-          color: Theme.of(context).colorScheme.primary,
+          size: 24.0,
+          color: Theme.of(context).colorScheme.secondary,
         ),
       ),
     );
@@ -90,60 +93,74 @@ class SharingBottomSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton.filled(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: SvgPicture.asset(
-                      'assets/ic_farcaster.svg',
-                      height: 24,
-                      width: 24,
-                    ),
-                  ),
-                  onPressed: () async {
-                    Uint8List? screenshot = _screensot ?? await _captureReceipt();
-                    if (screenshot != null) {
-                      _screensot = screenshot;
-                      onShare(screenshot, SharingAction.cast);
-                    } else {
-                      onScreenshotFailed();
-                    }
-                  }),
-              IconButton.filled(
-                  icon: const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(Icons.share, size: 24),
-                  ),
-                  onPressed: () async {
-                    Uint8List? screenshot = _screensot ?? await _captureReceipt();
-                    if (screenshot != null) {
-                      _screensot = screenshot;
-                      onShare(screenshot, SharingAction.share);
-                    } else {
-                      onScreenshotFailed();
-                    }
-                  }),
-              IconButton.filled(
-                  icon: const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(Icons.copy, size: 24),
-                  ),
-                  onPressed: () async {
-                    Uint8List? screenshot = _screensot ?? await _captureReceipt();
-                    if (screenshot != null) {
-                      _screensot = screenshot;
-                      onShare(screenshot, SharingAction.copy);
-                    } else {
-                      onScreenshotFailed();
-                    }
-                  }),
-            ],
+          SizedBox(
+            height: 64,
+            child: BlocBuilder<SharingBloc, SharingState>(
+              buildWhen: (context, state) {
+                return state is InfoState ||
+                    state is UploadingState ||
+                    state is UploadedState;
+              },
+              builder: (BuildContext context, state) {
+                if (state is InfoState || state is UploadedState) {
+                  return _sharingButtons(
+                    onShare: onShare,
+                    onScreenshotFailed: onScreenshotFailed,
+                  );
+                } else if (state is UploadingState) {
+                  return _loadingView(context);
+                } else {
+                  return Container();
+                }
+              },
+            ),
           ),
           const SizedBox(height: 32),
         ],
       ),
+    );
+  }
+
+  Widget _sharingButtons({
+    required Function(Uint8List, SharingAction) onShare,
+    required Function() onScreenshotFailed,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        IconButton.filled(
+            icon: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: SvgPicture.asset(
+                'assets/ic_farcaster.svg',
+                height: 24,
+                width: 24,
+              ),
+            ),
+            onPressed: () async {
+              Uint8List? screenshot = _screenshot ?? await _captureReceipt();
+              if (screenshot != null) {
+                _screenshot = screenshot;
+                onShare(screenshot, SharingAction.cast);
+              } else {
+                onScreenshotFailed();
+              }
+            }),
+        IconButton.filled(
+            icon: const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Icon(Icons.copy, size: 24),
+            ),
+            onPressed: () async {
+              Uint8List? screenshot = _screenshot ?? await _captureReceipt();
+              if (screenshot != null) {
+                _screenshot = screenshot;
+                onShare(screenshot, SharingAction.copy);
+              } else {
+                onScreenshotFailed();
+              }
+            }),
+      ],
     );
   }
 
