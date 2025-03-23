@@ -18,11 +18,13 @@ jobs:
         with:
           channel: "stable"
           flutter-version: 3.29.2
-      - name: 📄 Create .env file
-        run: |
-          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" > .env
-          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}" >> .env
-          cat .env  # Debugging: remove this after testing
+            - name:
+                Make .env file uses: SpicyPizza/create-envfile@v2.0
+            with:
+              fail_on_empty: true
+              envkey_NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+              envkeyNEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+              file_name: .env
       - name: 📦 Install Dependencies
         run: flutter pub get
       - name: 🛠️ Build the application
