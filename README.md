@@ -1,6 +1,7 @@
-# random_frame
+# Random Frame for Warpcast
+<img src="web/opengraph-image.png" width="128"/>
 
-A new Flutter project.
+Excersice in creating a Warpcast Frame using Flutter for Web.
 
 ## Getting Started
 
