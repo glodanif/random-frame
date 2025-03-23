@@ -24,7 +24,7 @@ class JsBridge {
   }
 
   void openUrl(String url) {
-
+    openUrlJs(url);
   }
 
   Future<Context> requestContext() {

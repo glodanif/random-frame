@@ -25,17 +25,17 @@ class HomeBloc extends Cubit<HomeState> {
 
   Future<void> loadContext() async {
     final context = await _jsBridge.requestContext();
-    //if (context.location != null) {
-    emit(
-      LoadedState(
-        username: context.username ?? "guest",
-        randomDice: _dice,
-        randomRotation: _rotation,
-      ),
-    );
-    //} else {
-    //  emit(InvalidLocationState());
-    //}
+    if (context.location != null || !kReleaseMode) {
+      emit(
+        LoadedState(
+          username: context.username ?? "guest",
+          randomDice: _dice,
+          randomRotation: _rotation,
+        ),
+      );
+    } else {
+      emit(InvalidLocationState());
+    }
   }
 
   void closeFrame() {
