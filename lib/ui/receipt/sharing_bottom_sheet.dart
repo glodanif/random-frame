@@ -16,6 +16,7 @@ class SharingBottomSheet extends StatelessWidget {
   final Game game;
   final String request;
   final _screenshotController = ScreenshotController();
+  Uint8List? _screensot = null;
 
   SharingBottomSheet({
     super.key,
@@ -102,8 +103,9 @@ class SharingBottomSheet extends StatelessWidget {
                     ),
                   ),
                   onPressed: () async {
-                    Uint8List? screenshot = await _captureReceipt();
+                    Uint8List? screenshot = _screensot ?? await _captureReceipt();
                     if (screenshot != null) {
+                      _screensot = screenshot;
                       onShare(screenshot, SharingAction.cast);
                     } else {
                       onScreenshotFailed();
@@ -115,8 +117,9 @@ class SharingBottomSheet extends StatelessWidget {
                     child: Icon(Icons.share, size: 24),
                   ),
                   onPressed: () async {
-                    Uint8List? screenshot = await _captureReceipt();
+                    Uint8List? screenshot = _screensot ?? await _captureReceipt();
                     if (screenshot != null) {
+                      _screensot = screenshot;
                       onShare(screenshot, SharingAction.share);
                     } else {
                       onScreenshotFailed();
@@ -128,8 +131,9 @@ class SharingBottomSheet extends StatelessWidget {
                     child: Icon(Icons.copy, size: 24),
                   ),
                   onPressed: () async {
-                    Uint8List? screenshot = await _captureReceipt();
+                    Uint8List? screenshot = _screensot ?? await _captureReceipt();
                     if (screenshot != null) {
+                      _screensot = screenshot;
                       onShare(screenshot, SharingAction.copy);
                     } else {
                       onScreenshotFailed();

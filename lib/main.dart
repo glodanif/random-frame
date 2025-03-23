@@ -111,7 +111,13 @@ class RandomApp extends StatelessWidget {
       titleLarge: GoogleFonts.righteous(
         textStyle: const TextStyle(
           fontSize: 28.0,
-          color: Color(0XFFEEEEEA),
+          color: Color(0XFF222345),
+        ),
+      ),
+      titleSmall: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          fontSize: 18.0,
+          color: Color(0XFF222345),
         ),
       ),
       bodyMedium: GoogleFonts.lato(

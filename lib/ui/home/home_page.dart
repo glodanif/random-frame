@@ -55,11 +55,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.transparent,
         title: Text(
           "Hello, ${state.username} 👋",
           style: Theme.of(context).textTheme.titleLarge,
         ),
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -68,7 +69,7 @@ class HomePage extends StatelessWidget {
                 BlocProvider.of<HomeBloc>(context).closeFrame();
               },
               icon: const Icon(Icons.close),
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: Theme.of(context).primaryColor,
             ),
           ),
         ],
@@ -80,9 +81,12 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Text("Random at your service"),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Text(
+                  "Random at your service",
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
               ),
               ...Game.getAllGames().map<Widget>(
                 (game) => Padding(
@@ -104,13 +108,12 @@ class HomePage extends StatelessWidget {
                   width: 96.0,
                   height: 96.0,
                   child: Transform.rotate(
-                    angle: state.randomRotation,
-                    child: SvgPicture.asset(
-                      "assets/dice_${state.randomDice}.svg",
-                      semanticsLabel: 'Random dice',
-                      fit: BoxFit.contain,
-                    )
-                  ),
+                      angle: state.randomRotation,
+                      child: SvgPicture.asset(
+                        "assets/dice_${state.randomDice}.svg",
+                        semanticsLabel: 'Random dice',
+                        fit: BoxFit.contain,
+                      )),
                 ),
               ),
             ],

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:go_router/go_router.dart';
 import 'package:random_frame/domain/game.dart';
 import 'package:random_frame/domain/game_result.dart';
 import 'package:random_frame/sl/get_it.dart';
-import 'package:random_frame/ui/game/bloc/game_bloc.dart';
 import 'package:random_frame/ui/component/result_renderer.dart';
+import 'package:random_frame/ui/game/bloc/game_bloc.dart';
 import 'package:random_frame/ui/receipt/sharing_bottom_sheet.dart';
 
 class GamePage extends StatefulWidget {
@@ -36,14 +35,11 @@ class _GamePageState extends State<GamePage> {
       key: _scaffoldKey,
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
         title: Text(
           widget._game.title,
           style: Theme.of(context).textTheme.titleLarge,
-        ),
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
         ),
       ),
       body: Center(
