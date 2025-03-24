@@ -35,10 +35,26 @@ Future<void> initSaas() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await Supabase.initialize(
-    url: dotenv.env['NEXT_PUBLIC_SUPABASE_ANON_KEY'] ?? '',
-    anonKey: dotenv.env['NEXT_PUBLIC_SUPABASE_URL'] ?? '',
-  );
+
+  var anonKey = '';
+  final anonKeyEnv = dotenv.env['NEXT_PUBLIC_SUPABASE_ANON_KEY'];
+  if (anonKeyEnv == null) {
+    print("NEXT_PUBLIC_SUPABASE_ANON_KEY is null");
+  } else {
+    anonKey = anonKeyEnv;
+    print("NEXT_PUBLIC_SUPABASE_ANON_KEY: ${anonKeyEnv.length} | ${anonKeyEnv.hashCode}");
+  }
+
+  var url = '';
+  final urlEnv = dotenv.env['NEXT_PUBLIC_SUPABASE_URL'];
+  if (urlEnv == null) {
+    print("NEXT_PUBLIC_SUPABASE_URL is null");
+  } else {
+    url = urlEnv;
+    print("NEXT_PUBLIC_SUPABASE_URL: ${urlEnv.length} | ${urlEnv.hashCode}");
+  }
+
+  await Supabase.initialize(url: url, anonKey: anonKey);
 }
 
 class RandomApp extends StatelessWidget {

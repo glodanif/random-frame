@@ -16,6 +16,5 @@ async function openUrl(url) {
 }
 
 function requestCaptchaToken() {
-    console.log(window.captchaToken);
     window.onCaptchaToken(window.captchaToken);
 }

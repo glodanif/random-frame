@@ -13,7 +13,6 @@ class SupabaseFileStorage {
     final currentUser = _auth.currentUser;
     if (currentUser == null) {
       final captchaToken = await _jsBridge.requestCaptchaToken();
-      print("captchaToken ===========> $captchaToken");
       final result = await _auth.signInAnonymously(captchaToken: captchaToken);
       if (result.user == null) {
         throw AuthApiException("Auth failed");
