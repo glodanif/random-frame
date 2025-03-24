@@ -1,0 +1,17 @@
+{
+    "accountAssociation": {
+        "header": "eyJmaWQiOjY1MDkwMSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDhhODZCZjQyY0RkNjc4NTRjMGVERjE5Nzk1MTdGM0ZENDQwYjkzYjAifQ",
+        "payload": "eyJkb21haW4iOiJyYW5kb20tZnJhbWUud2ViLmFwcCJ9",
+        "signature": "MHg2ZTNkZmY2M2Q2YTRkNzlkZDVjZDI4NGE2MmIyZDVjMmM5YjEzYjNkNWY1YWRlNGY0NzVkMTk3NGNlMzI1MjgwM2Y2NTU2MTM4YzAyZGQ0ODU2ZGJkODY3MGY1MzNhMTk2ZjA4MDgyY2JjZTEwMDU5NmU1Nzg5MzExOWFiM2ZlOTFi"
+    },
+    "frame": {
+        "version": "4",
+        "name": "Random",
+        "iconUrl": "https://random-frame.web.app/logo.png",
+        "homeUrl": "https://random-frame.web.app/",
+        "imageUrl": "https://random-frame.web.app/opengraph-image.png",
+        "buttonTitle": "🎲 Start",
+        "splashImageUrl": "https://random-frame.web.app/logo.png",
+        "splashBackgroundColor": "#EBD1FB"
+    }
+}

@@ -1,0 +1,1 @@
+enum SharingAction { cast, copy }
