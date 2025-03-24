@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:random_frame/data/js/js_layer.dart';
 import 'package:random_frame/domain/context.dart';
 import 'package:random_frame/domain/js_layer_event.dart';

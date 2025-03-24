@@ -1,10 +1,9 @@
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:random_frame/app_theme.dart';
 import 'package:random_frame/domain/game_result.dart';
 import 'package:random_frame/ui/component/dotted_line_divider.dart';
 import 'package:random_frame/ui/component/result_renderer.dart';
-import 'package:screenshot/screenshot.dart';
 
 class Receipt extends StatefulWidget {
   final String? username;
@@ -34,7 +33,7 @@ class _ReceiptState extends State<Receipt> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color(0xFFFBFBF9),
+      color: gradientBackgroundEnd,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

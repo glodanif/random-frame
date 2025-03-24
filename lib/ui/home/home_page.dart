@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:random_frame/domain/game.dart';
 import 'package:random_frame/sl/get_it.dart';
 import 'package:random_frame/ui/home/bloc/home_bloc.dart';
@@ -51,14 +52,11 @@ class HomePage extends StatelessWidget {
     LoadedState state,
   ) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         title: Text(
           "Hello, ${state.username} 👋",
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -96,7 +94,10 @@ class HomePage extends StatelessWidget {
                     style: FilledButton.styleFrom(
                       minimumSize: const Size(double.infinity, 64),
                     ),
-                    child: Text("${game.emoji} ${game.callToAction}"),
+                    child: Text(
+                      "${game.emoji} ${game.callToAction}",
+                      style: GoogleFonts.lato(),
+                    ),
                   ),
                 ),
               ), // Convert to List<Widget>

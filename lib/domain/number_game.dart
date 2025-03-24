@@ -14,7 +14,7 @@ class NumberGame extends Game {
           emoji: '🔢',
           title: 'Roll 1-100',
           action: 'Roll',
-          doneAction: 'rolled a number',
+          doneAction: 'rolled a 1-100 number',
         );
 
   @override

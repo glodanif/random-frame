@@ -190,13 +190,13 @@ class SharingBottomSheet extends StatelessWidget {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Error'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(text),
-              ],
-            ),
+          title: Text(
+            'Error',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          content: Text(
+            text,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
           actions: <Widget>[
             TextButton(

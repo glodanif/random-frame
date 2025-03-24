@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:random_frame/app_theme.dart';
 import 'package:random_frame/domain/game_result.dart';
 
 class ResultRenderer {
@@ -42,7 +43,7 @@ class ResultRenderer {
   Widget _textResult(String result, double textSize) {
     return Text(
       result,
-      style: GoogleFonts.oxanium(fontSize: textSize),
+      style: GoogleFonts.oxanium(fontSize: textSize, color: primaryDark),
     );
   }
 
@@ -65,9 +66,10 @@ class ResultRenderer {
           child: Text(
             result,
             textAlign: TextAlign.center,
-            style: GoogleFonts.lato(
+            style: GoogleFonts.montserrat(
               fontSize: 24,
-              color: const Color(0xFFFBFBF9),
+              color: gradientBackgroundEnd,
+              fontWeight: FontWeight.w500,
             ),
           ),
         )

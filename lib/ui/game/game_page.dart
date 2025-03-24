@@ -33,10 +33,7 @@ class _GamePageState extends State<GamePage> {
   Widget _gameBody(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
         title: Text(
           widget._game.title,
           style: Theme.of(context).textTheme.titleLarge,
@@ -58,10 +55,12 @@ class _GamePageState extends State<GamePage> {
                   maxLines: 5,
                   textCapitalization: TextCapitalization.sentences,
                   style: const TextStyle(fontSize: 18),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: "Type your random request...",
-                    hintStyle:
-                        TextStyle(color: Color(0x77232446), fontSize: 18),
+                    hintStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 18,
+                    ),
                     hintTextDirection: TextDirection.ltr,
                   ),
                 ),
@@ -99,7 +98,7 @@ class _GamePageState extends State<GamePage> {
         AspectRatio(
           aspectRatio: 1,
           child: Column(
-           mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 "${widget._game.action} to get your random result",
