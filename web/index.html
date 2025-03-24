@@ -38,10 +38,9 @@
 
     window.onCaptchaSuccess = function(token) {
         window.captchaToken = token;
-        console.log("Token stored successfully");
     };
 
-    const appVersion = '1.0.2+5'
+    const appVersion = '1.0.2+6'
     const jsAppScriptTag = document.createElement('script');
     jsAppScriptTag.src = 'app.js?v=' + appVersion;
     jsAppScriptTag.type = 'application/javascript';
