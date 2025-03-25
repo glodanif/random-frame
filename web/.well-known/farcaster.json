@@ -5,7 +5,7 @@
         "signature": "MHg2ZTNkZmY2M2Q2YTRkNzlkZDVjZDI4NGE2MmIyZDVjMmM5YjEzYjNkNWY1YWRlNGY0NzVkMTk3NGNlMzI1MjgwM2Y2NTU2MTM4YzAyZGQ0ODU2ZGJkODY3MGY1MzNhMTk2ZjA4MDgyY2JjZTEwMDU5NmU1Nzg5MzExOWFiM2ZlOTFi"
     },
     "frame": {
-        "version": "4",
+        "version": "next",
         "name": "Random",
         "iconUrl": "https://random-frame.web.app/logo.png",
         "homeUrl": "https://random-frame.web.app/",
